@@ -1,13 +1,21 @@
 "use client";
 import React, { ReactElement, useState } from "react";
-import { array } from "zod";
 import Counter from "./Counter";
 
-const ParentCounter = () => {
+type ParentCounterProps = {
+  grandParentCounter: (childrenCounts: number) => void;
+  childrenCounts: number;
+};
+
+const ParentCounter = ({
+  grandParentCounter,
+  childrenCounts,
+}: ParentCounterProps) => {
   const [parentCount, setParentCount] = useState(0);
   const [childCounters, setChildCounters] = useState<Array<ReactElement>>([]);
   const onClick = () => {
     const nextArray = [...childCounters, <Counter />];
+    grandParentCounter(childrenCounts);
     setParentCount(parentCount + 1);
     setChildCounters(nextArray);
   };

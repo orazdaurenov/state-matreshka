@@ -1,6 +1,10 @@
 "use client";
 import React, { useState } from "react";
 
+type CounterProps = {
+  onClick: () => void;
+};
+
 const Counter = () => {
   const [count, setCount] = useState(0);
   return (
