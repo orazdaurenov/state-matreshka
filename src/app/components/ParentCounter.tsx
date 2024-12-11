@@ -34,8 +34,13 @@ const ParentCounter = ({
         {parentCount}
       </button>
       <ul>
-        {childCounters.map((count, index) => (
-          <li key={index}>{count}</li>
+        {childCounters.map((_, index) => (
+          <li key={index}>
+            <Counter
+              grandParentCounter={grandParentCounter}
+              childrenCounts={childrenCounts}
+            />
+          </li>
         ))}
       </ul>
     </>
