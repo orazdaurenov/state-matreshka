@@ -2,7 +2,7 @@
 import React, { ReactElement, useState } from "react";
 import Counter from "./Counter";
 
-type ParentCounterProps = {
+export type ParentCounterProps = {
   grandParentCounter: (childrenCounts: number) => void;
   childrenCounts: number;
 };
@@ -14,7 +14,13 @@ const ParentCounter = ({
   const [parentCount, setParentCount] = useState(0);
   const [childCounters, setChildCounters] = useState<Array<ReactElement>>([]);
   const onClick = () => {
-    const nextArray = [...childCounters, <Counter />];
+    const nextArray = [
+      ...childCounters,
+      <Counter
+        grandParentCounter={grandParentCounter}
+        childrenCounts={childrenCounts}
+      />,
+    ];
     grandParentCounter(childrenCounts);
     setParentCount(parentCount + 1);
     setChildCounters(nextArray);
