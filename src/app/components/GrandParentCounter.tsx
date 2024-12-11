@@ -1,6 +1,5 @@
 import React, { ReactElement, useState } from "react";
 import ParentCounter from "./ParentCounter";
-import { log } from "console";
 
 const GrandParentCounter = () => {
   const [childrenCounts, setChildrenCounts] = useState(0);
@@ -38,7 +37,13 @@ const GrandParentCounter = () => {
       </button>
       <ul>
         {parentCounters.map((count, index) => (
-          <li key={index}>{count}</li>
+          <li key={index}>
+            {" "}
+            <ParentCounter
+              childrenCounts={childrenCounts}
+              grandParentCounter={gpCounter}
+            />
+          </li>
         ))}
       </ul>
     </>
